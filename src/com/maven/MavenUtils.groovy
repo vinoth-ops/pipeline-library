@@ -23,7 +23,7 @@ class MavenUtils {
             return artifactId
         } catch (Exception e) {
             // Print any errors encountered
-            println "Error extracting artifactId: ${e.message}"
+            script.echo "Error extracting artifactId: ${e.message}"
             return null
         }
     }
@@ -41,7 +41,7 @@ class MavenUtils {
             script.echo "${version}"
 
             if (version == null || version.isEmpty()) {
-                println "Error: No version found in pom.xml"
+                script.echo "Error: No version found in pom.xml"
                 return null
             }
 
@@ -49,7 +49,7 @@ class MavenUtils {
             return version
         } catch (Exception e) {
             // Print any errors encountered
-            println "Error extracting version: ${e.message}"
+            script.echo "Error extracting version: ${e.message}"
             return null
         }
     }
