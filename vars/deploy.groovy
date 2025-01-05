@@ -2,14 +2,6 @@
 import com.maven.MavenUtils
 import com.maven.Utils
 
-script {
-    System.setOut(new PrintStream(new OutputStream() {
-        void write(int b) {
-            echo new String([b] as byte[])
-        }
-    }))
-}
-
 
 def call() {
     echo 'message from Deploy.groovy: Deploying the application...'
