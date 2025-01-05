@@ -12,7 +12,7 @@ class MavenUtils {
             def pom = new XmlParser().parse("pom.xml")
             def artifactId = pom.artifactId?.text()
 
-           script.echo "${artifactId}"
+           script.echo "artifact id is: ${artifactId}"
 
             if (artifactId == null || artifactId.isEmpty()) {
                 script.echo "Error: No artifactId found in pom.xml"
@@ -29,10 +29,10 @@ class MavenUtils {
     }
 
     // Method to extract version from pom.xml
-    public static String getVersionFromPom(String pomFilePath) {
+    public static String getVersionFromPom(script) {
         try {
             // Log current working directory to ensure correct path
-            println "Current working directory: ${System.getProperty('user.dir')}"
+            script.echo "Current working directory: ${System.getProperty('user.dir')}"
             
             // Read the pom.xml file using XmlParser and extract version
             def pom = new XmlParser().parse(pomFilePath)
