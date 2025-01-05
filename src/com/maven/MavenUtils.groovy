@@ -3,18 +3,19 @@ package com.maven
 
 class MavenUtils {
     // Method to extract artifactId from pom.xml
-    public static String getArtifactIdFromPom(String pomFilePath) {
+    public static String getArtifactIdFromPom(script) {
         try {
             // Log current working directory to ensure correct path
-            println "Current working directory: ${System.getProperty('user.dir')}"
+            String cwd = script.pwd()
+            script.echo "$cwd"
             // Read the pom.xml file using XmlParser and extract artifactId
-            def pom = new XmlParser().parse(pomFilePath)
+            def pom = new XmlParser().parse("pom.xml")
             def artifactId = pom.artifactId?.text()
 
-            println "${artifactId}"
+           script.echo "${artifactId}"
 
             if (artifactId == null || artifactId.isEmpty()) {
-                println "Error: No artifactId found in pom.xml"
+                script.echo "Error: No artifactId found in pom.xml"
                 return null
             }
 
