@@ -40,12 +40,17 @@ class MavenUtils {
             String cwd = script.pwd()
             script.echo "$cwd"
             
-            // Read the pom.xml file using XmlParser and extract version
-            def pom = new XmlParser().parse("$cwd/pom.xml")
+            // Read the file contents as a string
+            def filePath = "$cwd/pom.xml"
+            def pomContent = script.readFile(filePath)
+            //script.echo "Read file contents: $pomContent"
+
+            // Parse the XML content
+            def pom = new XmlParser().parseText(pomContent)
             def version = pom.version?.text()
+            script.echo "Version: $version"
 
-            script.echo "${version}"
-
+            
             if (version == null || version.isEmpty()) {
                 script.echo "Error: No version found in pom.xml"
                 return null
