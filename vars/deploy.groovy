@@ -7,7 +7,9 @@ def call() {
 
     echo "Utils class: ${Utils}"
     // Add any other deploy steps, such as running scripts or commands
-    Utils.getcurrentdir()
+    res = Utils.getcurrentdir()
+
+    println "$res"
 
     echo "after calling Utils"
 }
