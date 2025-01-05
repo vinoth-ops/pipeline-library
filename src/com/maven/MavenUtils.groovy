@@ -3,7 +3,7 @@ package com.maven
 
 class MavenUtils {
     // Method to extract artifactId from pom.xml
-    static String getArtifactIdFromPom() {
+    String getArtifactIdFromPom() {
         try {
             echo "executing getArtifactIdFromPom method"
 
@@ -23,7 +23,7 @@ class MavenUtils {
     }
 
     // Method to extract version from pom.xml
-    static String getVersionFromPom() {
+    String getVersionFromPom() {
         try {
             echo " executing getVersionFromPom"
             def artifactId = sh(script: "grep -oPm1 '(?<=<version>)[^<]+' pom.xml", returnStdout: true).trim()
@@ -39,7 +39,7 @@ class MavenUtils {
     }
 
     // Method to execute shell commands and return exit status
-    static int executeCommand(String command) {
+    int executeCommand(String command) {
         echo "Executing: $command"
         def process = command.execute()
         process.waitFor()
