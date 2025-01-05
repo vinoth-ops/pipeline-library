@@ -31,7 +31,7 @@ class MavenUtils {
     // Method to extract version from pom.xml
     public static String getVersionFromPom(script) {
         try {
-            / Log current working directory to ensure correct path
+            // Log current working directory to ensure correct path
             String cwd = script.pwd()
             script.echo "$cwd"
             
