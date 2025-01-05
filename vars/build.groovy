@@ -12,8 +12,8 @@ def runBuildAndPushDockerImage(String credentialsId) {
         println "Starting runBuildAndPushDockerImage"
 
         
-        def artifactId = MavenUtils.getArtifactIdFromPom("pom.xml")
-        def version = MavenUtils.getVersionFromPom("pom.xml")
+        def artifactId = MavenUtils.getArtifactIdFromPom(this)
+        def version = MavenUtils.getVersionFromPom(this)
 
         println "$artifactId"
         println "$version"
