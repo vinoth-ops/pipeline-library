@@ -3,7 +3,7 @@ package com.maven
 
 class MavenUtils {
     // Method to extract artifactId from pom.xml
-    String getArtifactIdFromPom(String pomFilePath) {
+    public static String getArtifactIdFromPom(String pomFilePath) {
         try {
             // Log current working directory to ensure correct path
             println "Current working directory: ${System.getProperty('user.dir')}"
@@ -28,7 +28,7 @@ class MavenUtils {
     }
 
     // Method to extract version from pom.xml
-    String getVersionFromPom(String pomFilePath) {
+    public static String getVersionFromPom(String pomFilePath) {
         try {
             // Log current working directory to ensure correct path
             println "Current working directory: ${System.getProperty('user.dir')}"
@@ -53,25 +53,5 @@ class MavenUtils {
         }
     }
 
-    // Method to execute shell commands and return exit status
-    int executeCommand(String command) {
-        try {
-            // Logging the command with println (echo is not available in regular Groovy class)
-            println "Executing: $command"
-
-            // Execute the shell command
-            def process = command.execute()
-
-            // Wait for the process to finish
-            process.waitFor()
-
-            // Return the exit status of the process
-            return process.exitValue()
-        } catch (Exception e) {
-            // If there are any errors, print the error message
-            println "Error executing command: ${e.message}"
-            return -1  // Return -1 to indicate failure
-        }
-    }
 }
 
