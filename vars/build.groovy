@@ -2,6 +2,7 @@
 
 // Import the MavenUtils class (located in src folder)
 import com.maven.MavenUtils
+import com.maven.Utils
 
 // Define the build logic function (without the pipeline block)
 def runBuildAndPushDockerImage(String credentialsId) {
@@ -9,7 +10,10 @@ def runBuildAndPushDockerImage(String credentialsId) {
     withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
         // Use methods from MavenUtils (class in src/com/maven/MavenUtils.groovy)
         println "Starting runBuildAndPushDockerImage"
+
         
+        Utils.getcurrentdir()
+        println "continue calling"
         def artifactId = MavenUtils.getArtifactIdFromPom("pom.xml")
         def version = MavenUtils.getVersionFromPom("pom.xml")
 
