@@ -7,7 +7,7 @@ def call() {
     echo 'message from Deploy.groovy: Deploying the application...'
 
     try {
-        def res = Utils.getcurrentdir()
+        def res = Utils.getcurrentdir(this)
         echo "Result from Utils.getcurrentdir: ${res}"
     } catch (Exception e) {
         echo "Exception in deploy.groovy: ${e.message}"
