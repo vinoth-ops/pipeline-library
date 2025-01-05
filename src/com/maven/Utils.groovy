@@ -1,8 +1,7 @@
 package com.maven
 
 class Utils {
-    Script script;
-    public static String getcurrentdir() {
+    public static String getcurrentdir(script) {
         try {
             script.echo "message from Utils.getcurrentdir: entering method execution"
             return "Method successfully executed"
