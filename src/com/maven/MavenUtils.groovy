@@ -9,7 +9,7 @@ class MavenUtils {
             String cwd = script.pwd()
             script.echo "$cwd"
             // Read the pom.xml file using XmlParser and extract artifactId
-            def pom = new XmlParser().parse("pom.xml")
+            def pom = new XmlParser().parse("$cwd/pom.xml")
             def artifactId = pom.artifactId?.text()
 
            script.echo "artifact id is: ${artifactId}"
@@ -31,11 +31,12 @@ class MavenUtils {
     // Method to extract version from pom.xml
     public static String getVersionFromPom(script) {
         try {
-            // Log current working directory to ensure correct path
-            script.echo "Current working directory: ${System.getProperty('user.dir')}"
+            / Log current working directory to ensure correct path
+            String cwd = script.pwd()
+            script.echo "$cwd"
             
             // Read the pom.xml file using XmlParser and extract version
-            def pom = new XmlParser().parse("pom.xml")
+            def pom = new XmlParser().parse("$cwd/pom.xml")
             def version = pom.version?.text()
 
             script.echo "${version}"
