@@ -1,7 +1,7 @@
 // src/com/maven/MyLibrary.groovy
 package com.maven
 
-class MyLibrary {
+class MavenUtils {
     // Method to extract artifactId from pom.xml
     static String getArtifactIdFromPom() {
         try {
