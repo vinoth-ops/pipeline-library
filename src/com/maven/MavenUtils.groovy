@@ -35,10 +35,10 @@ class MavenUtils {
             script.echo "Current working directory: ${System.getProperty('user.dir')}"
             
             // Read the pom.xml file using XmlParser and extract version
-            def pom = new XmlParser().parse(pomFilePath)
+            def pom = new XmlParser().parse("pom.xml")
             def version = pom.version?.text()
 
-            println "${version}"
+            script.echo "${version}"
 
             if (version == null || version.isEmpty()) {
                 println "Error: No version found in pom.xml"
