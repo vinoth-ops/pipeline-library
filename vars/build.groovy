@@ -8,9 +8,13 @@ def runBuildAndPushDockerImage(String credentialsId) {
     // Fetch Docker Hub credentials using Jenkins' credentials binding
     withCredentials([usernamePassword(credentialsId: credentialsId, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
         // Use methods from MavenUtils (class in src/com/maven/MavenUtils.groovy)
+        println "Starting runBuildAndPushDockerImage"
         
         def artifactId = MavenUtils.getArtifactIdFromPom("pom.xml")
         def version = MavenUtils.getVersionFromPom("pom.xml")
+
+        println "$artifactId"
+        println "$version"
 
         if (artifactId == null || version == null) {
             currentBuild.result = 'FAILURE'
