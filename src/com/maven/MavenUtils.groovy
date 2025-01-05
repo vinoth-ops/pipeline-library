@@ -5,9 +5,13 @@ class MavenUtils {
     // Method to extract artifactId from pom.xml
     String getArtifactIdFromPom(String pomFilePath) {
         try {
+            // Log current working directory to ensure correct path
+            println "Current working directory: ${System.getProperty('user.dir')}"
             // Read the pom.xml file using XmlParser and extract artifactId
             def pom = new XmlParser().parse(pomFilePath)
             def artifactId = pom.artifactId?.text()
+
+            println "${artifactId}"
 
             if (artifactId == null || artifactId.isEmpty()) {
                 println "Error: No artifactId found in pom.xml"
@@ -26,9 +30,14 @@ class MavenUtils {
     // Method to extract version from pom.xml
     String getVersionFromPom(String pomFilePath) {
         try {
+            // Log current working directory to ensure correct path
+            println "Current working directory: ${System.getProperty('user.dir')}"
+            
             // Read the pom.xml file using XmlParser and extract version
             def pom = new XmlParser().parse(pomFilePath)
             def version = pom.version?.text()
+
+            println "${version}"
 
             if (version == null || version.isEmpty()) {
                 println "Error: No version found in pom.xml"
