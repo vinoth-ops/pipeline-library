@@ -10,6 +10,7 @@ def runBuildAndPushDockerImage(String credentialsId) {
         // Use methods from MavenUtils (class in src/com/maven/MavenUtils.groovy)
         
         def mavenUtils = new MavenUtils()
+        def testcall = mavenUtils.getTestfrompom()
         def artifactId = mavenUtils.getArtifactIdFromPom("pom.xml")
         def version = mavenUtils.getVersionFromPom("pom.xml")
 
