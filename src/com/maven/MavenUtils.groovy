@@ -12,13 +12,12 @@ class MavenUtils {
             // Read the file contents as a string
             def filePath = "$cwd/pom.xml"
             def pomContent = script.readFile(filePath)
-            script.echo "Read file contents: $pomContent"
-            
-            // Read the pom.xml file using XmlParser and extract artifactId
-            def pom = new XmlParser().parse("$cwd/pom.xml")
-            def artifactId = pom.artifactId?.text()
+            //script.echo "Read file contents: $pomContent"
 
-           script.echo "artifact id is: ${artifactId}"
+            // Parse the XML content
+            def pom = new XmlParser().parseText(pomContent)
+            def artifactId = pom.artifactId?.text()
+            script.echo "artifactId: $artifactId"
 
             if (artifactId == null || artifactId.isEmpty()) {
                 script.echo "Error: No artifactId found in pom.xml"
