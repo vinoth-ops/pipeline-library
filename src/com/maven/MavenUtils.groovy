@@ -3,47 +3,66 @@ package com.maven
 
 class MavenUtils {
     // Method to extract artifactId from pom.xml
-    String getArtifactIdFromPom() {
+    String getArtifactIdFromPom(String pomFilePath) {
         try {
-            echo "executing getArtifactIdFromPom method"
+            // Read the pom.xml file using XmlParser and extract artifactId
+            def pom = new XmlParser().parse(pomFilePath)
+            def artifactId = pom.artifactId?.text()
 
-            sh 'ls -l'  // List files in the current directory
-            
-            def artifactId = sh(script: "grep -oPm1 '(?<=<artifactId>)[^<]+' pom.xml", returnStdout: true).trim()
-            
-            if (artifactId.isEmpty()) {
-                echo "No artifactId found in pom.xml"
+            if (artifactId == null || artifactId.isEmpty()) {
+                println "Error: No artifactId found in pom.xml"
                 return null
             }
+
+            // Return the extracted artifactId
             return artifactId
         } catch (Exception e) {
-            echo "Error extracting artifactId: ${e.message}"
+            // Print any errors encountered
+            println "Error extracting artifactId: ${e.message}"
             return null
         }
     }
 
     // Method to extract version from pom.xml
-    String getVersionFromPom() {
+    String getVersionFromPom(String pomFilePath) {
         try {
-            echo " executing getVersionFromPom"
-            def artifactId = sh(script: "grep -oPm1 '(?<=<version>)[^<]+' pom.xml", returnStdout: true).trim()
-            if (version.isEmpty()) {
-                echo "No version found in pom.xml"
+            // Read the pom.xml file using XmlParser and extract version
+            def pom = new XmlParser().parse(pomFilePath)
+            def version = pom.version?.text()
+
+            if (version == null || version.isEmpty()) {
+                println "Error: No version found in pom.xml"
                 return null
             }
+
+            // Return the extracted version
             return version
         } catch (Exception e) {
-            echo "Error extracting version: ${e.message}"
+            // Print any errors encountered
+            println "Error extracting version: ${e.message}"
             return null
         }
     }
 
     // Method to execute shell commands and return exit status
     int executeCommand(String command) {
-        echo "Executing: $command"
-        def process = command.execute()
-        process.waitFor()
-        return process.exitValue()
+        try {
+            // Logging the command with println (echo is not available in regular Groovy class)
+            println "Executing: $command"
+
+            // Execute the shell command
+            def process = command.execute()
+
+            // Wait for the process to finish
+            process.waitFor()
+
+            // Return the exit status of the process
+            return process.exitValue()
+        } catch (Exception e) {
+            // If there are any errors, print the error message
+            println "Error executing command: ${e.message}"
+            return -1  // Return -1 to indicate failure
+        }
     }
 }
 
