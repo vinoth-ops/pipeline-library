@@ -2,8 +2,11 @@ package com.maven
 
 class Utils {
   public static void getcurrentdir() {
-    
-    println "message from utils.getcurrentdir: entering method execution"
-    println "Current working directory: ${System.getProperty('user.dir')}"
+   try {
+        println "message from Utils.getcurrentdir: entering method execution"
+        println "Current working directory: ${System.getProperty('user.dir')}"
+    } catch (Exception e) {
+        println "Exception in getcurrentdir: ${e.message}"
+    }
   }
 }
