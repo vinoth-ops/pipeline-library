@@ -15,13 +15,19 @@ def runBuildAndPushDockerImage(String credentialsId) {
         def artifactId = MavenUtils.getArtifactIdFromPom(this)
         def version = MavenUtils.getVersionFromPom(this)
 
-        println "$artifactId"
-        println "$version"
+        println "ArtifactId extracted from POM: $artifactId"
+        println "Artifact version extracted from POM: $version"
 
         if (artifactId == null || version == null) {
             currentBuild.result = 'FAILURE'
             error("Failed to extract artifactId or version.")
         }
+
+        // Set environment variables
+        env.ARTIFACT_ID = artifactId
+        env.ARTIFACT_VERSION = version
+
+        println "updated environment variables for artifact ID and version ${env.ARTIFACT_ID} : ${env.ARTIFACT_VERSION}"
 
         println "Building Docker image for artifactId: $artifactId and version: $version"
 
