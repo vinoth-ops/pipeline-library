@@ -134,7 +134,7 @@ def main():
 
     # Pull Docker image
     print(f"Pulling Docker image: {artifact}:{version}...")
-    subprocess.check_call(f"docker pull {artifact}:{version}", shell=True)
+    subprocess.check_call(f"docker pull {username}/{artifact}:{version}", shell=True)
 
     # Determine current active color
     print("Determining current active deployment...")
